@@ -3,6 +3,7 @@ const graphqlHTTP = require('express-graphql');
 const schema = require('./schema/schema');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const {mongodbURI} = require('./secret/secret');
 
 const app = express();
 
@@ -11,7 +12,8 @@ app.use(cors());
 
 // connect to mlab database
 // make sure to replace my db string & creds with your own
-mongoose.connect('mongodb://testUser:testUser1234@ds127342.mlab.com:27342/graphql-netninja');
+console.log(mongodbURI);
+mongoose.connect(mongodbURI);
 mongoose.connection.once('open', () => {
     console.log('Connected to database.');
 });
